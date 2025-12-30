@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Extension Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    h1 { color: #667eea; }
+    button {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 10px 5px;
+    }
+    button:hover { background: #c82333; }
+    .success { background: #28a745; }
+    .success:hover { background: #218838; }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+    }
+    .show { display: block; }
+    .error { background: #f8d7da; color: #721c24; }
+    .ok { background: #d4edda; color: #155724; }
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #c7254e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Fix Extension Settings</h1>
+    
+    <p>If you're getting errors about model names, use this tool to clean your settings.</p>
+
+    <h3>Current Settings:</h3>
+    <div id="current-settings" style="background: #f9f9f9; padding: 15px; border-radius: 6px; margin: 15px 0;">
+      <em>Loading...</em>
+    </div>
+
+    <h3>Actions:</h3>
+    <button onclick="cleanSettings()" class="success">✨ Clean Model Name</button>
+    <button onclick="clearModelName()">🗑️ Clear Model Name</button>
+    <button onclick="resetAll()">🔄 Reset All Settings</button>
+
+    <div id="result" class="result"></div>
+
+    <hr style="margin: 30px 0;">
+
+    <h3>Manual Setup (Recommended):</h3>
+    <ol>
+      <li>Click extension icon in Chrome toolbar</li>
+      <li>AI Provider: Select "Google Gemini"</li>
+      <li>API Key: Paste your key</li>
+      <li>Model Name: <strong>Leave COMPLETELY BLANK</strong></li>
+      <li>Click "Save Settings"</li>
+    </ol>
+  </div>
+
+  <script>
+    // Show current settings
+    async function loadSettings() {
+      try {
+        const settings = await chrome.storage.sync.get(['aiProvider', 'apiKey', 'modelName', 'customPrompt']);
+        
+        document.getElementById('current-settings').innerHTML = `
+          <strong>AI Provider:</strong> ${settings.aiProvider || '(not set)'}<br>
+          <strong>API Key:</strong> ${settings.apiKey ? '***' + settings.apiKey.slice(-4) : '(not set)'}<br>
+          <strong>Model Name:</strong> ${settings.modelName ? '<code>' + settings.modelName + '</code>' : '(blank)'}<br>
+          <strong>Custom Prompt:</strong> ${settings.customPrompt ? 'Set' : '(blank)'}
+        `;
+      } catch (error) {
+        document.getElementById('current-settings').innerHTML = 
+          '<span style="color: red;">Error: Cannot access extension settings. Make sure this page is opened in Chrome with the extension installed.</span>';
+      }
+    }
+
+    // Clean model name (remove models/ and -latest)
+    async function cleanSettings() {
+      const result = document.getElementById('result');
+      try {
+        const settings = await chrome.storage.sync.get(['modelName']);
+        let modelName = settings.modelName || '';
+        
+        const original = modelName;
+        
+        // Clean it
+        modelName = modelName.trim();
+        modelName = modelName.replace(/^models\//, '');
+        modelName = modelName.replace(/-latest$/, '');
+        
+        await chrome.storage.sync.set({ modelName });
+        
+        result.className = 'result ok show';
+        result.innerHTML = `
+          ✅ Cleaned model name!<br><br>
+          Before: <code>${original || '(blank)'}</code><br>
+          After: <code>${modelName || '(blank)'}</code><br><br>
+          Now reload the extension and try again.
+        `;
+        
+        loadSettings();
+      } catch (error) {
+        result.className = 'result error show';
+        result.textContent = '❌ Error: ' + error.message;
+      }
+    }
+
+    // Clear model name completely
+    async function clearModelName() {
+      const result = document.getElementById('result');
+      try {
+        await chrome.storage.sync.set({ modelName: '' });
+        
+        result.className = 'result ok show';
+        result.innerHTML = '✅ Model name cleared! Extension will use default: <code>gemini-1.5-flash</code>';
+        
+        loadSettings();
+      } catch (error) {
+        result.className = 'result error show';
+        result.textContent = '❌ Error: ' + error.message;
+      }
+    }
+
+    // Reset all settings
+    async function resetAll() {
+      if (!confirm('Are you sure? This will erase all your settings including API key.')) {
+        return;
+      }
+      
+      const result = document.getElementById('result');
+      try {
+        await chrome.storage.sync.clear();
+        
+        result.className = 'result ok show';
+        result.innerHTML = '✅ All settings reset! You need to configure the extension again.';
+        
+        loadSettings();
+      } catch (error) {
+        result.className = 'result error show';
+        result.textContent = '❌ Error: ' + error.message;
+      }
+    }
+
+    // Load settings on page load
+    loadSettings();
+  </script>
+</body>
+</html>

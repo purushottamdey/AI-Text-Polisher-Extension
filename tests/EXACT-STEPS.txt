@@ -1,0 +1,222 @@
+URGENT: FOLLOW THESE EXACT STEPS
+==================================
+
+DO NOT SKIP ANY STEP. Do them in order.
+
+═══════════════════════════════════════════════════
+STEP 1: VERIFY EXTENSION IS INSTALLED
+═══════════════════════════════════════════════════
+
+1. Type in Chrome address bar: chrome://extensions/
+2. Press Enter
+3. Look for "AI Text Polisher"
+
+DO YOU SEE IT?
+
+□ YES → Continue to Step 2
+□ NO → You need to install it first:
+   a. Make sure "Developer mode" toggle (top right) is ON
+   b. Click "Load unpacked"
+   c. Select folder: C:\Users\purushottam.dey\Desktop\ChromeAdon
+   d. Extension should appear
+
+
+═══════════════════════════════════════════════════
+STEP 2: MAKE SURE EXTENSION IS ENABLED
+═══════════════════════════════════════════════════
+
+On chrome://extensions/ page:
+
+1. Find "AI Text Polisher"
+2. Look at the toggle switch (bottom right of the card)
+3. Is it BLUE/ON?
+
+□ YES, it's blue → Continue to Step 3
+□ NO, it's gray → Click it to turn ON, then continue
+
+
+═══════════════════════════════════════════════════
+STEP 3: CHECK FOR ERRORS
+═══════════════════════════════════════════════════
+
+Still on chrome://extensions/ page:
+
+1. Look at "AI Text Polisher" card
+2. Do you see any RED error messages?
+
+□ NO errors → Continue to Step 4
+□ YES, there are errors → STOP and tell me what the error says
+
+
+═══════════════════════════════════════════════════
+STEP 4: RELOAD THE EXTENSION
+═══════════════════════════════════════════════════
+
+Still on chrome://extensions/ page:
+
+1. Find "AI Text Polisher"
+2. Look for circular arrow icon (reload button)
+3. Click it
+4. Wait 2 seconds
+
+
+═══════════════════════════════════════════════════
+STEP 5: CONFIGURE SETTINGS (CRITICAL)
+═══════════════════════════════════════════════════
+
+1. Look for the extension icon in Chrome toolbar (top right)
+   - It should be a puzzle piece or the extension icon
+   - If you don't see it, click the puzzle piece icon to see all extensions
+
+2. Click "AI Text Polisher" icon
+
+3. A popup should open. Enter these settings:
+
+   AI Provider: Click dropdown → Select "Google Gemini"
+   
+   API Key: Paste your key (starts with AIza...)
+   If you don't have one: https://aistudio.google.com/app/apikey
+   
+   Model Name: LEAVE THIS COMPLETELY BLANK (delete anything there)
+   
+   Custom Instructions: LEAVE THIS BLANK
+
+4. Click the "Save Settings" button at the bottom
+
+5. Wait for green message "Settings saved successfully!"
+
+DID YOU SEE THE SUCCESS MESSAGE?
+
+□ YES → Continue to Step 6
+□ NO → Try clicking Save again
+
+
+═══════════════════════════════════════════════════
+STEP 6: TEST ON A REAL WEBSITE
+═══════════════════════════════════════════════════
+
+1. Open a NEW TAB
+2. Go to: https://example.com
+3. Wait for page to load completely
+4. Right-click anywhere on the page
+5. Select "Inspect" or press F12
+6. Click the "Console" tab
+7. Keep this console open
+
+Now on the example.com page:
+
+8. Triple-click this text to select it:
+   "This domain is for use in illustrative examples in documents."
+
+9. After selecting, look ABOVE the selected text
+
+DO YOU SEE A BUTTON that says "✨ Polish Text"?
+
+□ YES, I see the button → Continue to Step 7
+□ NO, no button appears → STOP, there's a problem
+
+
+If NO BUTTON appears, check the Console tab (F12):
+- Look for RED error messages
+- Take a screenshot and tell me what it says
+
+
+═══════════════════════════════════════════════════
+STEP 7: CLICK THE BUTTON
+═══════════════════════════════════════════════════
+
+1. With text still selected
+2. Click the "✨ Polish Text" button
+3. Watch both:
+   - The page (should show loading)
+   - The Console (F12, look for messages)
+
+WHAT HAPPENS?
+
+□ Loading spinner appears → GOOD, wait for result
+□ Error message appears → Tell me what it says
+□ Nothing happens → Check console for errors
+
+
+═══════════════════════════════════════════════════
+COMMON PROBLEMS & INSTANT FIXES
+═══════════════════════════════════════════════════
+
+Problem: "No button appears when I select text"
+Fix:
+1. Press F12, go to Console tab
+2. Select text again
+3. Do you see ANY red errors?
+4. If yes, tell me the error
+5. If no errors, reload extension and try again
+
+
+Problem: "Extension icon doesn't appear in toolbar"
+Fix:
+1. Click puzzle piece icon (top right of Chrome)
+2. Find "AI Text Polisher"
+3. Click the pin icon to pin it to toolbar
+
+
+Problem: "Can't click extension icon, nothing happens"
+Fix:
+1. Go to chrome://extensions/
+2. Click "Details" on AI Text Polisher
+3. Scroll down
+4. Make sure "Site access" is set to "On all sites"
+
+
+Problem: "Button appears but clicking does nothing"
+Fix:
+1. Go to chrome://extensions/
+2. Find "AI Text Polisher"
+3. Look for blue link "service worker"
+4. Click it
+5. Check for errors in that console
+6. Tell me what errors you see
+
+
+Problem: "Settings popup won't open"
+Fix:
+1. Right-click the extension icon
+2. Select "Manage extension"
+3. Check for errors on that page
+
+
+═══════════════════════════════════════════════════
+DEBUGGING CHECKLIST
+═══════════════════════════════════════════════════
+
+If nothing works, check ALL of these:
+
+□ Extension appears in chrome://extensions/
+□ Extension toggle is BLUE (enabled)
+□ No RED errors on extension card
+□ Extension has been reloaded (clicked refresh icon)
+□ Settings popup opens when clicking icon
+□ "Google Gemini" is selected
+□ API key is entered (starts with AIza...)
+□ Model name field is BLANK (nothing entered)
+□ "Save Settings" was clicked
+□ Success message appeared after saving
+□ Testing on example.com (not a file:// page)
+□ F12 console is open to see errors
+□ Selected text on the page
+□ Waited 3 seconds after selecting
+
+
+═══════════════════════════════════════════════════
+TELL ME EXACTLY WHICH STEP FAILS
+═══════════════════════════════════════════════════
+
+Go through steps 1-7 above.
+
+Which step doesn't work? Tell me:
+- Step number:
+- What you see:
+- What you expected:
+- Any error messages:
+- Screenshot if possible:
+
+
+THIS WILL HELP ME FIX THE EXACT PROBLEM!

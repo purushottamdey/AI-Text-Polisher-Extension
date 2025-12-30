@@ -1,0 +1,95 @@
+📦 AI Text Polisher - Chrome Extension
+Made with ❤️ by @purushottam
+
+═══════════════════════════════════════════════════════════════
+
+📥 INSTALLATION INSTRUCTIONS
+
+Method 1: Install from ZIP (Recommended)
+----------------------------------------
+1. Extract the ZIP file to a folder on your computer
+2. Open Chrome and go to: chrome://extensions/
+3. Enable "Developer mode" (toggle in top-right corner)
+4. Click "Load unpacked"
+5. Select the extracted folder
+6. Done! The extension icon will appear in your toolbar
+
+Method 2: Install from Folder
+------------------------------
+1. Open Chrome and go to: chrome://extensions/
+2. Enable "Developer mode" (toggle in top-right corner)
+3. Click "Load unpacked"
+4. Select the "ChromeAdon" folder
+5. Done!
+
+═══════════════════════════════════════════════════════════════
+
+⚙️ SETUP
+
+1. Click the extension icon in Chrome toolbar
+2. Choose your AI provider:
+   • OpenAI (ChatGPT)
+   • Anthropic (Claude)
+   • Google Gemini ⭐ Recommended - Free tier available
+   • Custom API
+
+3. Enter your API key:
+   • OpenAI: https://platform.openai.com/api-keys
+   • Anthropic: https://console.anthropic.com/
+   • Gemini: https://aistudio.google.com/app/apikey
+
+4. Leave "Model Name" blank (recommended)
+5. Click "Save Settings"
+
+═══════════════════════════════════════════════════════════════
+
+✨ HOW TO USE
+
+1. Go to any website (LinkedIn, Confluence, Google Docs, etc.)
+2. Select any text you want to polish
+3. Click the "✨ Polish Text" button that appears
+4. Get AI-powered suggestions instantly!
+5. Click "Copy" or "Replace" to use the polished version
+
+═══════════════════════════════════════════════════════════════
+
+📋 FEATURES
+
+✅ Works on all websites (LinkedIn, Confluence, Gmail, etc.)
+✅ Multiple AI providers (OpenAI, Claude, Gemini)
+✅ Supports long text (2000+ words)
+✅ Instant suggestions with one click
+✅ Copy or replace selected text
+✅ Secure API key storage
+✅ Customizable prompts
+✅ Fast and lightweight
+
+═══════════════════════════════════════════════════════════════
+
+🔧 TROUBLESHOOTING
+
+Button not appearing?
+• Reload the page after installing
+• Check chrome://extensions/ - ensure extension is enabled
+• Open browser console (F12) and look for errors
+
+API not working?
+• Verify your API key is correct
+• For Gemini: Leave "Model Name" blank
+• Check your API quota/billing
+
+Need help?
+• Open the extension settings
+• Check the console (F12 → Console tab)
+• Contact: @purushottam on LinkedIn
+
+═══════════════════════════════════════════════════════════════
+
+🌟 SHARE & SUPPORT
+
+Enjoying this extension? 
+• Share it with your colleagues
+• Connect with me: https://www.linkedin.com/in/purushottam-dey2/
+• Star the project if hosted on GitHub
+
+Made with ❤️ by @purushottam

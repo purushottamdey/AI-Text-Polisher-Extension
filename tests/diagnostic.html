@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extension Diagnostic Tool</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    .test-card {
+      background: #f9f9f9;
+      border-left: 4px solid #667eea;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+    .test-card h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      color: #155724;
+    }
+    .error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+      color: #721c24;
+    }
+    .info {
+      background: #d1ecf1;
+      border-left: 4px solid #17a2b8;
+      color: #0c5460;
+    }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .status.pass { background: #28a745; color: white; }
+    .status.fail { background: #dc3545; color: white; }
+    .status.pending { background: #ffc107; color: black; }
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #c7254e;
+    }
+    .step {
+      margin: 10px 0;
+      padding: 10px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔬 Extension Diagnostic Tool</h1>
+    <p>This tool will test each component of your extension step by step to find the problem.</p>
+
+    <!-- Important Notice -->
+    <div class="test-card" style="border-left-color: #dc3545; background: #fff5f5;">
+      <h3>⚠️ IMPORTANT: Enable File Access First!</h3>
+      <p><strong>If you see "Chrome extension API not available" error:</strong></p>
+      <ol>
+        <li>Go to <code>chrome://extensions/</code></li>
+        <li>Find "AI Text Polisher"</li>
+        <li>Click "Details" button</li>
+        <li>Scroll down and toggle ON: <strong>"Allow access to file URLs"</strong></li>
+        <li>Reload this page</li>
+      </ol>
+      <p><strong>OR</strong> use the simpler test below instead:</p>
+      <button onclick="window.open('https://www.google.com')" style="background: #28a745;">
+        Open Google (Test There Instead)
+      </button>
+    </div>
+
+    <!-- Test 1: Extension Exists -->
+    <div class="test-card">
+      <h3>Test 1: Check if Extension is Loaded <span id="test1-status" class="status pending">PENDING</span></h3>
+      <button onclick="test1()">Run Test 1</button>
+      <div id="test1-result"></div>
+    </div>
+
+    <!-- Test 2: Settings Storage -->
+    <div class="test-card">
+      <h3>Test 2: Check Settings Storage <span id="test2-status" class="status pending">PENDING</span></h3>
+      <button onclick="test2()">Run Test 2</button>
+      <div id="test2-result"></div>
+    </div>
+
+    <!-- Test 3: Background Communication -->
+    <div class="test-card">
+      <h3>Test 3: Test Background Script Communication <span id="test3-status" class="status pending">PENDING</span></h3>
+      <button onclick="test3()">Run Test 3</button>
+      <div id="test3-result"></div>
+    </div>
+
+    <!-- Test 4: API Call -->
+    <div class="test-card">
+      <h3>Test 4: Test Direct API Call <span id="test4-status" class="status pending">PENDING</span></h3>
+      <button onclick="test4()">Run Test 4</button>
+      <div id="test4-result"></div>
+    </div>
+
+    <!-- Test 5: Full Integration -->
+    <div class="test-card">
+      <h3>Test 5: Full Integration Test <span id="test5-status" class="status pending">PENDING</span></h3>
+      <p>Select this text and click the Polish button: <strong>this text needs polishing</strong></p>
+      <div id="test5-result"></div>
+    </div>
+
+    <!-- Run All -->
+    <div style="text-align: center; margin-top: 30px;">
+      <button onclick="runAllTests()" style="background: #28a745; font-size: 16px; padding: 15px 30px;">
+        ▶️ RUN ALL TESTS
+      </button>
+    </div>
+
+    <!-- Instructions -->
+    <div class="test-card" style="margin-top: 30px; border-left-color: #ffc107;">
+      <h3>📋 Before Running Tests:</h3>
+      <ol>
+        <li>Make sure the extension is installed and enabled</li>
+        <li>Reload the extension at <code>chrome://extensions/</code></li>
+        <li>Open browser console (F12) to see detailed logs</li>
+        <li>Run tests one by one or click "RUN ALL TESTS"</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Test 1: Check if extension exists
+    async function test1() {
+      const resultDiv = document.getElementById('test1-result');
+      const statusSpan = document.getElementById('test1-status');
+      
+      resultDiv.innerHTML = '<div class="result info">Testing...</div>';
+      statusSpan.className = 'status pending';
+      statusSpan.textContent = 'TESTING';
+
+      try {
+        if (typeof chrome === 'undefined' || !chrome.runtime) {
+          throw new Error('Chrome extension API not available');
+        }
+
+        const extensionId = chrome.runtime.id;
+        
+        resultDiv.innerHTML = `
+          <div class="result success">
+            ✅ SUCCESS: Extension is loaded!
+            
+Extension ID: ${extensionId}
+            
+This means:
+• Extension is installed
+• Extension is enabled
+• Extension can communicate with this page
+          </div>
+        `;
+        statusSpan.className = 'status pass';
+        statusSpan.textContent = 'PASS';
+        return true;
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <div class="result error">
+            ❌ FAILED: ${error.message}
+            
+Possible causes:
+• Extension is not installed
+• Extension is disabled
+• You need to reload the extension
+
+FIX: Go to chrome://extensions/ and make sure "AI Text Polisher" is enabled
+          </div>
+        `;
+        statusSpan.className = 'status fail';
+        statusSpan.textContent = 'FAIL';
+        return false;
+      }
+    }
+
+    // Test 2: Check settings
+    async function test2() {
+      const resultDiv = document.getElementById('test2-result');
+      const statusSpan = document.getElementById('test2-status');
+      
+      resultDiv.innerHTML = '<div class="result info">Testing...</div>';
+      statusSpan.className = 'status pending';
+      statusSpan.textContent = 'TESTING';
+
+      try {
+        const settings = await chrome.storage.sync.get(['aiProvider', 'apiKey', 'modelName']);
+        
+        console.log('Retrieved settings:', settings);
+
+        let issues = [];
+        if (!settings.aiProvider) issues.push('No AI provider selected');
+        if (!settings.apiKey) issues.push('No API key configured');
+        if (settings.aiProvider === 'gemini' && settings.modelName && !['gemini-1.5-flash-latest', 'gemini-1.5-pro-latest', 'gemini-2.0-flash-exp', ''].includes(settings.modelName)) {
+          issues.push(`Invalid model: "${settings.modelName}"`);
+        }
+
+        if (issues.length === 0) {
+          resultDiv.innerHTML = `
+            <div class="result success">
+              ✅ SUCCESS: Settings are configured!
+              
+AI Provider: ${settings.aiProvider || 'NOT SET'}
+API Key: ${settings.apiKey ? '***' + settings.apiKey.slice(-4) : 'NOT SET'}
+Model Name: ${settings.modelName || '(default)'}
+              
+All settings look good!
+            </div>
+          `;
+          statusSpan.className = 'status pass';
+          statusSpan.textContent = 'PASS';
+          return true;
+        } else {
+          resultDiv.innerHTML = `
+            <div class="result error">
+              ⚠️ ISSUES FOUND:
+              
+${issues.map(i => '• ' + i).join('\n')}
+
+Current settings:
+AI Provider: ${settings.aiProvider || 'NOT SET'}
+API Key: ${settings.apiKey ? 'SET (***' + settings.apiKey.slice(-4) + ')' : 'NOT SET'}
+Model Name: ${settings.modelName || '(default)'}
+
+FIX: Click the extension icon and configure your settings
+            </div>
+          `;
+          statusSpan.className = 'status fail';
+          statusSpan.textContent = 'FAIL';
+          return false;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <div class="result error">
+            ❌ FAILED: ${error.message}
+            
+Cannot access extension storage.
+FIX: Reload the extension at chrome://extensions/
+          </div>
+        `;
+        statusSpan.className = 'status fail';
+        statusSpan.textContent = 'FAIL';
+        return false;
+      }
+    }
+
+    // Test 3: Test background communication
+    async function test3() {
+      const resultDiv = document.getElementById('test3-result');
+      const statusSpan = document.getElementById('test3-status');
+      
+      resultDiv.innerHTML = '<div class="result info">Testing background script communication...</div>';
+      statusSpan.className = 'status pending';
+      statusSpan.textContent = 'TESTING';
+
+      try {
+        const testText = 'test message';
+        
+        const response = await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            reject(new Error('Timeout: No response from background script after 10 seconds'));
+          }, 10000);
+
+          chrome.runtime.sendMessage({
+            action: 'polishText',
+            text: testText
+          }, (response) => {
+            clearTimeout(timeout);
+            
+            if (chrome.runtime.lastError) {
+              reject(new Error(chrome.runtime.lastError.message));
+              return;
+            }
+            
+            resolve(response);
+          });
+        });
+
+        console.log('Background response:', response);
+
+        if (response.error) {
+          resultDiv.innerHTML = `
+            <div class="result warning">
+              ⚠️ Background script responded but with error:
+              
+${response.error}
+
+This means:
+• Background script is working
+• But there's an issue with API call
+• Check API key and settings
+
+Next: Run Test 4 to verify API directly
+            </div>
+          `;
+          statusSpan.className = 'status fail';
+          statusSpan.textContent = 'FAIL';
+          return false;
+        } else if (response.polishedText) {
+          resultDiv.innerHTML = `
+            <div class="result success">
+              ✅ SUCCESS: Background script is working!
+              
+Original text: ${testText}
+Polished text: ${response.polishedText}
+
+Everything is working correctly!
+            </div>
+          `;
+          statusSpan.className = 'status pass';
+          statusSpan.textContent = 'PASS';
+          return true;
+        } else {
+          resultDiv.innerHTML = `
+            <div class="result error">
+              ❌ Unexpected response format:
+              
+${JSON.stringify(response, null, 2)}
+            </div>
+          `;
+          statusSpan.className = 'status fail';
+          statusSpan.textContent = 'FAIL';
+          return false;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <div class="result error">
+            ❌ FAILED: ${error.message}
+            
+Possible causes:
+• Background service worker crashed
+• Extension needs to be reloaded
+• Background script has errors
+
+FIX:
+1. Go to chrome://extensions/
+2. Find "AI Text Polisher"
+3. Click "service worker" link (if you see it)
+4. Check for errors in that console
+5. Reload the extension
+          </div>
+        `;
+        statusSpan.className = 'status fail';
+        statusSpan.textContent = 'FAIL';
+        return false;
+      }
+    }
+
+    // Test 4: Direct API test
+    async function test4() {
+      const resultDiv = document.getElementById('test4-result');
+      const statusSpan = document.getElementById('test4-status');
+      
+      resultDiv.innerHTML = '<div class="result info">Testing direct API call...</div>';
+      statusSpan.className = 'status pending';
+      statusSpan.textContent = 'TESTING';
+
+      try {
+        const settings = await chrome.storage.sync.get(['aiProvider', 'apiKey', 'modelName']);
+        
+        if (!settings.apiKey) {
+          throw new Error('No API key configured');
+        }
+
+        if (settings.aiProvider !== 'gemini') {
+          resultDiv.innerHTML = `
+            <div class="result info">
+              ℹ️ SKIPPED: Not using Gemini (using ${settings.aiProvider})
+              
+This test only works for Gemini.
+If other tests pass, your extension is working fine.
+            </div>
+          `;
+          statusSpan.className = 'status pending';
+          statusSpan.textContent = 'SKIP';
+          return true;
+        }
+
+        const model = settings.modelName || 'gemini-1.5-flash-latest';
+        const cleanModel = model.replace(/^models\//, '');
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${cleanModel}:generateContent?key=${settings.apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{ text: 'Say "API test successful" in a professional way.' }]
+            }]
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error?.message || `API error: ${response.status}`);
+        }
+
+        const result = data.candidates[0].content.parts[0].text;
+
+        resultDiv.innerHTML = `
+          <div class="result success">
+            ✅ SUCCESS: Direct API call works!
+            
+Model used: ${cleanModel}
+Response: ${result}
+
+Your API key and model are correct!
+If background test failed, there's an issue with the extension code.
+          </div>
+        `;
+        statusSpan.className = 'status pass';
+        statusSpan.textContent = 'PASS';
+        return true;
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <div class="result error">
+            ❌ API CALL FAILED: ${error.message}
+            
+This means your API key or model name is wrong.
+
+FIX:
+1. Click extension icon
+2. Check API key is correct
+3. Set model to: gemini-1.5-flash-latest
+4. Or leave model blank
+5. Save settings and try again
+          </div>
+        `;
+        statusSpan.className = 'status fail';
+        statusSpan.textContent = 'FAIL';
+        return false;
+      }
+    }
+
+    // Run all tests
+    async function runAllTests() {
+      console.log('=== Running All Tests ===');
+      
+      const test1Pass = await test1();
+      if (!test1Pass) return;
+      
+      await new Promise(r => setTimeout(r, 1000));
+      const test2Pass = await test2();
+      
+      await new Promise(r => setTimeout(r, 1000));
+      const test3Pass = await test3();
+      
+      await new Promise(r => setTimeout(r, 1000));
+      await test4();
+      
+      console.log('=== All Tests Complete ===');
+    }
+
+    console.log('Diagnostic page loaded. Click "RUN ALL TESTS" to begin.');
+  </script>
+</body>
+</html>

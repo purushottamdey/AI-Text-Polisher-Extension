@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug - Extension Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { color: #667eea; }
+    .test-section {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      border-left: 4px solid #667eea;
+    }
+    .test-text {
+      background: #fff;
+      padding: 15px;
+      border: 2px dashed #667eea;
+      border-radius: 4px;
+      margin: 15px 0;
+      line-height: 1.6;
+    }
+    .instructions {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+    .checklist {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      border-left: 4px solid #ffc107;
+    }
+    ul { line-height: 1.8; }
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .step {
+      margin: 15px 0;
+      padding: 15px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    .step h3 {
+      color: #667eea;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Extension Debug Page</h1>
+    
+    <div class="instructions">
+      <h2>📋 How to Debug:</h2>
+      <ol>
+        <li>Make sure the extension is installed and enabled</li>
+        <li>Open Developer Tools (Press <code>F12</code>)</li>
+        <li>Go to the <strong>Console</strong> tab</li>
+        <li>Select the text below</li>
+        <li>Click the "✨ Polish Text" button</li>
+        <li>Watch the console for error messages</li>
+      </ol>
+    </div>
+
+    <div class="test-section">
+      <h2>✨ Test Area - Select This Text:</h2>
+      
+      <div class="test-text">
+        <p><strong>Test 1 - Simple text:</strong></p>
+        <p>this is a test text that need to be polished and made more professional</p>
+      </div>
+
+      <div class="test-text">
+        <p><strong>Test 2 - Email draft:</strong></p>
+        <p>hey john, can you send me the report by tomorrow? thanks</p>
+      </div>
+
+      <div class="test-text">
+        <p><strong>Test 3 - Longer paragraph:</strong></p>
+        <p>I wanted to reach out and touch base about the project we discussed last week. I think we should probably move forward with the plan we talked about but I'm not totally sure if everyone is on the same page yet so maybe we should have another meeting to make sure everything is clear.</p>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <h2>✅ Pre-Flight Checklist:</h2>
+      
+      <div class="step">
+        <h3>Step 1: Check Extension Status</h3>
+        <ul>
+          <li>Go to <code>chrome://extensions/</code></li>
+          <li>Find "AI Text Polisher"</li>
+          <li>Make sure it's <strong>enabled</strong> (toggle is blue/on)</li>
+          <li>Make sure <strong>Developer mode</strong> is ON (top-right)</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Step 2: Check Settings</h3>
+        <ul>
+          <li>Click the extension icon in Chrome toolbar</li>
+          <li>Verify "Google Gemini" is selected</li>
+          <li>Verify API key is entered</li>
+          <li>Model name should be: <code>gemini-1.5-flash-latest</code> or blank</li>
+          <li>Click "Save Settings" to make sure it's saved</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Step 3: Check Service Worker</h3>
+        <ul>
+          <li>Go to <code>chrome://extensions/</code></li>
+          <li>Find "AI Text Polisher"</li>
+          <li>Click the blue <code>service worker</code> link</li>
+          <li>This opens the background console</li>
+          <li>Keep this window open while testing</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Step 4: Test on This Page</h3>
+        <ul>
+          <li>Keep Developer Tools open (<code>F12</code>)</li>
+          <li>Select one of the test texts above</li>
+          <li>Look for the "✨ Polish Text" button</li>
+          <li>Click it</li>
+          <li>Watch BOTH consoles (page + service worker)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h2>🔍 What to Look For in Console:</h2>
+      
+      <h3>In Page Console (F12):</h3>
+      <ul>
+        <li>✅ "Received polishText request" - message sent successfully</li>
+        <li>✅ "Received response" - got answer back</li>
+        <li>❌ "Chrome runtime error" - extension communication issue</li>
+        <li>❌ "No response from background script" - background not responding</li>
+      </ul>
+
+      <h3>In Service Worker Console:</h3>
+      <ul>
+        <li>✅ "Starting polishText with..." - received request</li>
+        <li>✅ "Loaded settings" - settings loaded OK</li>
+        <li>✅ "Using provider: gemini" - correct provider selected</li>
+        <li>✅ "Calling Gemini API" - making API call</li>
+        <li>✅ "Gemini API response" - got response from API</li>
+        <li>✅ "Successfully polished text" - all done!</li>
+        <li>❌ Any red error messages - check what they say</li>
+      </ul>
+    </div>
+
+    <div class="checklist">
+      <h2>🐛 Common Issues & Fixes:</h2>
+      
+      <p><strong>Issue: Button doesn't appear</strong></p>
+      <ul>
+        <li>Reload this page</li>
+        <li>Reload the extension at <code>chrome://extensions/</code></li>
+        <li>Make sure extension is enabled</li>
+      </ul>
+
+      <p><strong>Issue: Button appears but nothing happens</strong></p>
+      <ul>
+        <li>Check if service worker is running (should see "service worker" link)</li>
+        <li>If it says "Inspect views: (inactive)", click near it to wake it up</li>
+        <li>Reload the extension</li>
+      </ul>
+
+      <p><strong>Issue: Error about API key</strong></p>
+      <ul>
+        <li>Click extension icon</li>
+        <li>Re-enter your API key</li>
+        <li>Click Save Settings</li>
+        <li>Try again</li>
+      </ul>
+
+      <p><strong>Issue: Error about model not found</strong></p>
+      <ul>
+        <li>Click extension icon</li>
+        <li>Change Model Name to: <code>gemini-1.5-flash-latest</code></li>
+        <li>Or leave it blank</li>
+        <li>Click Save Settings</li>
+      </ul>
+
+      <p><strong>Issue: "Failed to fetch" or CORS error</strong></p>
+      <ul>
+        <li>This shouldn't happen in a Chrome extension</li>
+        <li>Reload the extension completely</li>
+        <li>Restart Chrome browser</li>
+      </ul>
+    </div>
+
+    <div class="instructions">
+      <h2>📸 What to Check Right Now:</h2>
+      <ol>
+        <li>Open two console windows:
+          <ul>
+            <li>This page: Press <code>F12</code></li>
+            <li>Extension: Go to <code>chrome://extensions/</code> → Click "service worker"</li>
+          </ul>
+        </li>
+        <li>Select text above</li>
+        <li>Click "✨ Polish Text"</li>
+        <li>Read the console messages</li>
+        <li>Look for error messages in red</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    console.log('✅ Debug page loaded');
+    console.log('If you can see this, the console is working!');
+    console.log('Now try selecting text and clicking the Polish Text button...');
+  </script>
+</body>
+</html>

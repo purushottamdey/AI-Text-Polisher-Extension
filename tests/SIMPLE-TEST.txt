@@ -1,0 +1,210 @@
+🚀 SIMPLE TEST - Use This Instead of Diagnostic
+=================================================
+
+The diagnostic.html requires enabling file access. 
+Use this SIMPLER method instead:
+
+═══════════════════════════════════════════════════
+METHOD 1: Test on Google (Easiest)
+═══════════════════════════════════════════════════
+
+1. Go to https://www.google.com
+2. Type any text in the search box (don't search)
+3. Select the text you just typed
+4. Look for "✨ Polish Text" button
+5. Click it
+
+If button appears → Extension content script works ✅
+If button doesn't appear → See fixes below
+
+
+═══════════════════════════════════════════════════
+METHOD 2: Test with This Text File
+═══════════════════════════════════════════════════
+
+1. Open Notepad or any text editor
+2. Paste this text:
+   "this is a test message that needs to be improved"
+3. Save as test.txt
+4. Open test.txt in Chrome (drag it into browser)
+5. Select the text
+6. Look for "✨ Polish Text" button
+
+Note: You may need to enable "Allow access to file URLs"
+(See instructions in diagnostic.html)
+
+
+═══════════════════════════════════════════════════
+METHOD 3: Open Browser Console and Test Manually
+═══════════════════════════════════════════════════
+
+1. Go to ANY website (e.g., google.com, github.com)
+2. Press F12 to open Developer Tools
+3. Go to "Console" tab
+4. Paste this code and press Enter:
+
+   chrome.storage.sync.get(['aiProvider', 'apiKey', 'modelName'], (settings) => {
+     console.log('Settings:', settings);
+   });
+
+5. Check the output:
+   - If you see your settings → Storage works ✅
+   - If error → Extension not loaded ❌
+
+
+═══════════════════════════════════════════════════
+METHOD 4: Check Service Worker Directly
+═══════════════════════════════════════════════════
+
+1. Go to chrome://extensions/
+2. Find "AI Text Polisher"
+3. Look for blue text "service worker"
+4. Click it (opens console)
+
+What you should see:
+✅ Console window opens → Background script loaded
+❌ "Inactive" or no link → Background crashed
+
+If inactive:
+- Click somewhere on the page to wake it up
+- Or reload the extension
+
+
+═══════════════════════════════════════════════════
+MOST COMMON ISSUES & FIXES:
+═══════════════════════════════════════════════════
+
+Issue: Button doesn't appear when selecting text
+--------------------------------------------------
+Fix 1: Reload extension
+  - chrome://extensions/ → click reload icon
+
+Fix 2: Refresh the webpage
+  - Press Ctrl+R or F5
+
+Fix 3: Try on a different website
+  - Some sites block content scripts
+
+
+Issue: Button appears but clicking does nothing
+--------------------------------------------------
+Fix 1: Check service worker console
+  - chrome://extensions/ → click "service worker"
+  - Look for errors
+
+Fix 2: Verify settings
+  - Click extension icon
+  - Provider: Google Gemini
+  - API Key: entered
+  - Model: BLANK or gemini-1.5-flash-latest
+  - Click Save
+
+
+Issue: Error messages appear
+--------------------------------------------------
+Fix 1: API key wrong
+  - Get new key: https://aistudio.google.com/app/apikey
+  - Enter in settings
+
+Fix 2: Model not found
+  - Clear model name field (leave blank)
+  - Or use: gemini-1.5-flash-latest
+
+Fix 3: Background crashed
+  - Reload extension at chrome://extensions/
+
+
+═══════════════════════════════════════════════════
+QUICK VERIFICATION CHECKLIST:
+═══════════════════════════════════════════════════
+
+Before testing, verify:
+
+□ Extension installed at chrome://extensions/
+□ Extension is ENABLED (toggle is blue/on)
+□ Developer mode is ON (top right toggle)
+□ Extension reloaded after file changes
+□ Settings saved (click extension icon → check settings)
+□ API key entered (get from https://aistudio.google.com/app/apikey)
+□ Model name is BLANK or gemini-1.5-flash-latest
+□ Testing on regular webpage (not chrome:// or file://)
+
+
+═══════════════════════════════════════════════════
+STEP-BY-STEP: Fresh Start Test
+═══════════════════════════════════════════════════
+
+1. Go to: chrome://extensions/
+2. Find "AI Text Polisher"
+3. Click reload icon (circular arrow)
+4. Click extension icon in toolbar
+5. Verify settings:
+   - AI Provider: Google Gemini
+   - API Key: AIza... (your key)
+   - Model Name: (leave blank)
+6. Click "Save Settings"
+7. Open new tab: google.com
+8. Type: "this is a test"
+9. Select that text
+10. Click "✨ Polish Text" button
+
+Expected: Loading panel → AI response → Success!
+
+
+═══════════════════════════════════════════════════
+IF STILL NOT WORKING:
+═══════════════════════════════════════════════════
+
+Open TWO console windows:
+
+Console 1 - Service Worker:
+  chrome://extensions/ → "service worker" link
+
+Console 2 - Webpage:
+  On any site → Press F12
+
+Then try the extension and look for errors in BOTH consoles.
+
+Common error messages and what they mean:
+
+"Could not establish connection"
+→ Background script crashed, reload extension
+
+"API key not configured"  
+→ Click extension icon, save settings again
+
+"Model not found"
+→ Clear model name or use gemini-1.5-flash-latest
+
+"Failed to fetch"
+→ Network/API issue, check internet connection
+
+"No response from background script"
+→ Service worker inactive, reload extension
+
+
+═══════════════════════════════════════════════════
+WORKING SETUP (Copy This):
+═══════════════════════════════════════════════════
+
+Extension Settings:
+  AI Provider: Google Gemini
+  API Key: [Your key from https://aistudio.google.com/app/apikey]
+  Model Name: [LEAVE THIS BLANK]
+  Custom Prompt: [LEAVE THIS BLANK]
+
+Chrome Settings:
+  Extension enabled: YES
+  Developer mode: YES
+  Allow access to file URLs: YES (optional, for testing on file://)
+
+Testing:
+  1. Go to google.com
+  2. Select any text
+  3. Click ✨ Polish Text
+  4. Wait for response
+  5. Should work!
+
+
+If following ALL these steps still doesn't work, there may be a 
+deeper issue with the extension code or Chrome installation.

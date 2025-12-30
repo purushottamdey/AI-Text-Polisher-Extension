@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Text Polisher - Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>⚙️ AI Text Polisher</h1>
+    <p class="subtitle">Configure your AI provider</p>
+
+    <div class="form-group">
+      <label for="ai-provider">AI Provider</label>
+      <select id="ai-provider">
+        <option value="openai">OpenAI (ChatGPT)</option>
+        <option value="anthropic">Anthropic (Claude)</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="custom">Custom API</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="api-key">API Key</label>
+      <input type="password" id="api-key" placeholder="Enter your API key">
+      <button type="button" id="toggle-key" class="toggle-btn">Show</button>
+    </div>
+
+    <div class="form-group" id="custom-endpoint-group" style="display: none;">
+      <label for="custom-endpoint">Custom API Endpoint</label>
+      <input type="text" id="custom-endpoint" placeholder="https://api.example.com/v1/chat">
+    </div>
+
+    <div class="form-group">
+      <label for="model-name">Model Name (Optional - Leave Blank)</label>
+      <input type="text" id="model-name" placeholder="Leave blank for default (gemini-2.0-flash)">
+      <small style="display: block; margin-top: 5px; color: #666; font-size: 12px;">
+        ⭐ Recommended: Leave blank | Or use: gemini-2.0-flash, gemini-1.5-flash, gemini-1.5-pro
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="custom-prompt">Custom Instructions (Optional)</label>
+      <textarea id="custom-prompt" rows="3" placeholder="Add custom instructions for the AI..."></textarea>
+    </div>
+
+    <button id="save-btn" class="save-btn">Save Settings</button>
+    
+    <div id="status-message" class="status-message"></div>
+
+    <div class="usage-info">
+      <h3>How to use:</h3>
+      <ol>
+        <li>Select any text on a webpage</li>
+        <li>Click the ✨ button that appears</li>
+        <li>Get AI-powered suggestions to improve your text</li>
+      </ol>
+    </div>
+
+    <div class="footer">
+      Made with ❤️ by <a href="https://www.linkedin.com/in/purushottam-dey2/" target="_blank" rel="noopener">@purushottam</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

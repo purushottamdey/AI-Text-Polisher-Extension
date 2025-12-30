@@ -1,0 +1,102 @@
+✅ VALID GEMINI MODEL NAMES (Updated December 2024)
+====================================================
+
+RECOMMENDED MODELS (Use these):
+--------------------------------
+
+1. gemini-1.5-flash ⭐ BEST CHOICE
+   - Fastest and most reliable
+   - FREE tier: 15 requests/minute
+   - Works with v1beta API
+   - DEFAULT if you leave model name blank
+
+2. gemini-1.5-pro
+   - More capable, better quality
+   - FREE tier: 2 requests/minute
+   - Works with v1beta API
+
+3. gemini-2.0-flash-exp
+   - Latest experimental version
+   - May change without notice
+   - Use with caution
+
+
+HOW TO USE IN EXTENSION:
+-------------------------
+
+OPTION 1: Leave Model Name BLANK ⭐ RECOMMENDED
+- Click extension icon
+- Find "Model Name" field
+- DELETE everything (leave it empty)
+- Click "Save Settings"
+- Extension will use: gemini-1.5-flash
+
+OPTION 2: Specify Model Name
+- Click extension icon
+- In "Model Name" field, enter EXACTLY:
+  • gemini-1.5-flash
+  • gemini-1.5-pro
+  • gemini-2.0-flash-exp
+- NO "-latest" suffix
+- NO "models/" prefix
+- Click "Save Settings"
+
+
+INVALID MODEL NAMES (Don't Use):
+---------------------------------
+
+❌ gemini-3-pro-preview (doesn't exist)
+❌ gemini-pro (old name, deprecated)
+❌ gemini-ultra (not available via API)
+❌ models/gemini-1.5-flash (remove "models/" prefix)
+❌ gemini-1.5-flash (without -latest might not work)
+
+
+FIXING THE ERROR:
+-----------------
+
+If you see: "models/gemini-3-pro-preview is not found"
+
+DO THIS:
+1. Click the extension icon
+2. Look at "Model Name" field
+3. Either:
+   a) DELETE whatever is there (leave it blank), OR
+   b) Replace with: gemini-1.5-flash-latest
+4. Click "Save Settings"
+5. Try again
+
+
+HOW TO FIND CURRENT MODELS:
+----------------------------
+
+Google's official model list:
+https://ai.google.dev/gemini-api/docs/models/gemini
+
+Or test directly:
+https://aistudio.google.com/
+
+
+TROUBLESHOOTING:
+----------------
+
+Error: "Model not found"
+Fix: Use gemini-1.5-flash-latest or leave blank
+
+Error: "Not supported for generateContent"
+Fix: Some models don't support text generation, use flash or pro
+
+Error: "API version v1beta"
+Fix: Updated to v1, reload extension
+
+
+QUICK FIX RIGHT NOW:
+--------------------
+
+1. Click extension icon in Chrome
+2. Model Name field → DELETE everything
+3. Leave it BLANK
+4. Click "Save Settings"
+5. Test again
+
+The extension will automatically use gemini-1.5-flash-latest

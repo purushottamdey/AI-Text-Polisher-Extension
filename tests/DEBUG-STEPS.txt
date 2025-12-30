@@ -1,0 +1,201 @@
+🔧 DEBUGGING STEPS - "Polish Text" Not Working
+================================================
+
+Follow these steps IN ORDER to find the problem:
+
+═══════════════════════════════════════════════════
+STEP 1: RELOAD THE EXTENSION
+═══════════════════════════════════════════════════
+
+1. Go to: chrome://extensions/
+2. Find "AI Text Polisher"
+3. Click the RELOAD icon (circular arrow)
+4. Or toggle it OFF then ON again
+
+Why: After updating files, the extension needs to reload
+
+
+═══════════════════════════════════════════════════
+STEP 2: VERIFY SETTINGS ARE SAVED
+═══════════════════════════════════════════════════
+
+1. Click the extension icon in Chrome toolbar
+2. Check these settings:
+   
+   ✓ AI Provider: "Google Gemini" selected
+   ✓ API Key: Your key is entered (starts with AIza...)
+   ✓ Model Name: Either "gemini-1.5-flash-latest" OR leave blank
+   
+3. Click "Save Settings" button
+4. Wait for "Settings saved successfully!" message
+
+Why: Settings might not have been saved properly
+
+
+═══════════════════════════════════════════════════
+STEP 3: OPEN DEBUG PAGE
+═══════════════════════════════════════════════════
+
+1. Open "debug-page.html" in Chrome
+   (Double-click the file or drag it into Chrome)
+
+2. Press F12 to open Developer Tools
+3. Go to "Console" tab
+4. Keep this open
+
+Why: This page has test text and shows detailed errors
+
+
+═══════════════════════════════════════════════════
+STEP 4: OPEN SERVICE WORKER CONSOLE
+═══════════════════════════════════════════════════
+
+1. Go to: chrome://extensions/
+2. Find "AI Text Polisher"
+3. Look for blue text that says "service worker"
+4. Click it (opens a new console window)
+5. Keep this window open too
+
+Why: This shows what's happening in the background
+
+
+═══════════════════════════════════════════════════
+STEP 5: TEST AND WATCH CONSOLE
+═══════════════════════════════════════════════════
+
+Now you have TWO console windows open:
+- Page console (debug-page.html)
+- Service worker console (background script)
+
+On debug-page.html:
+1. Select some text
+2. Look for "✨ Polish Text" button
+3. Click it
+4. WATCH BOTH CONSOLE WINDOWS
+
+What you should see in SERVICE WORKER console:
+----------------------------------------------
+✅ Received polishText request: {action: "polishText", text: "..."}
+✅ Starting polishText with: ...
+✅ Loaded settings: {aiProvider: "gemini", hasApiKey: true, ...}
+✅ Using provider: gemini
+✅ Calling Gemini API: {...}
+✅ Gemini API response: {...}
+✅ Successfully polished text
+
+What you should see in PAGE console:
+------------------------------------
+✅ Received response: {polishedText: "..."}
+
+
+═══════════════════════════════════════════════════
+STEP 6: IDENTIFY THE PROBLEM
+═══════════════════════════════════════════════════
+
+IF YOU SEE THIS ERROR → DO THIS:
+---------------------------------
+
+❌ "No response from background script"
+   → Service worker crashed or isn't running
+   → Go to chrome://extensions/
+   → Click "service worker" to restart it
+   → Try again
+
+❌ "API key not configured"
+   → Click extension icon
+   → Re-enter API key
+   → Click Save Settings
+   → Try again
+
+❌ "API_KEY_INVALID" or "403 Forbidden"
+   → Your API key is wrong or revoked
+   → Get new key: https://aistudio.google.com/app/apikey
+   → Enter it in settings
+   → Save and try again
+
+❌ "Model not found" or "404"
+   → Wrong model name
+   → Use: gemini-1.5-flash-latest
+   → Or leave blank
+   → Save and try again
+
+❌ "Failed to fetch" or "Network error"
+   → Internet connection issue
+   → Check you're online
+   → Try again
+
+❌ "Chrome runtime error: Could not establish connection"
+   → Extension crashed or was reloaded
+   → Go to chrome://extensions/
+   → Reload the extension
+   → Refresh the webpage
+   → Try again
+
+❌ Button doesn't appear when selecting text
+   → Content script not loaded
+   → Reload the extension
+   → Refresh the webpage (Ctrl+R)
+   → Try selecting text again
+
+
+═══════════════════════════════════════════════════
+STEP 7: TEST WITH SIMPLE API TESTER
+═══════════════════════════════════════════════════
+
+If extension still doesn't work, test API directly:
+
+1. Open "test-gemini.html" in Chrome
+2. Enter your API key
+3. Click "Test Gemini API"
+4. If this WORKS → Extension has a bug
+5. If this FAILS → API key or quota problem
+
+
+═══════════════════════════════════════════════════
+QUICK FIXES TO TRY:
+═══════════════════════════════════════════════════
+
+Try these in order:
+
+1. Reload extension (chrome://extensions/ → reload icon)
+2. Restart Chrome completely
+3. Remove and re-add extension
+4. Get new API key
+5. Test with OpenAI instead (to verify extension works)
+
+
+═══════════════════════════════════════════════════
+STILL NOT WORKING?
+═══════════════════════════════════════════════════
+
+Take a screenshot or copy the error from:
+1. Service worker console
+2. Page console
+
+Common working setup:
+- Provider: Google Gemini
+- Model: gemini-1.5-flash-latest (or blank)
+- API key from: https://aistudio.google.com/app/apikey
+- Extension reloaded after file changes
+- Testing on regular webpage (not chrome:// pages)
+
+
+═══════════════════════════════════════════════════
+VERIFICATION CHECKLIST:
+═══════════════════════════════════════════════════
+
+Before reporting issues, verify:
+
+□ Extension is enabled in chrome://extensions/
+□ Developer mode is ON
+□ Extension has been reloaded after file updates
+□ Settings are saved (clicked "Save Settings" button)
+□ API key is correct and not expired
+□ Model name is "gemini-1.5-flash-latest" or blank
+□ Testing on a normal webpage (not chrome:// or file://)
+□ Internet connection is working
+□ Tried test-gemini.html and it works
+□ Checked both console windows for errors
+□ Service worker is active (not "inactive")
+
+If ALL boxes checked and still not working, there may be a bug.

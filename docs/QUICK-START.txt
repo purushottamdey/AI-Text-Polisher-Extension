@@ -1,0 +1,129 @@
+🚀 QUICK START GUIDE - AI Text Polisher Chrome Extension
+================================================================
+
+📁 STEP 1: GENERATE ICONS
+--------------------------
+1. Open "generate-icons.html" in your web browser
+2. Click each download button to save the icon files:
+   - icon16.png
+   - icon48.png
+   - icon128.png
+3. Move the downloaded files to the "icons/" folder
+   (Replace any existing placeholder files)
+
+
+🔧 STEP 2: INSTALL THE EXTENSION
+----------------------------------
+1. Open Chrome and go to: chrome://extensions/
+2. Enable "Developer mode" (toggle in top-right corner)
+3. Click "Load unpacked"
+4. Select the "ChromeAdon" folder
+5. The extension should now appear in your extensions list
+
+
+⚙️ STEP 3: CONFIGURE YOUR AI PROVIDER
+---------------------------------------
+1. Click the extension icon in your Chrome toolbar
+2. Choose your AI provider:
+   
+   Option A - OpenAI (Recommended):
+   - Select "OpenAI (ChatGPT)"
+   - Get API key from: https://platform.openai.com/api-keys
+   - Paste your API key
+   - (Optional) Enter model: gpt-4o-mini or gpt-4o
+   
+   Option B - Anthropic:
+   - Select "Anthropic (Claude)"
+   - Get API key from: https://console.anthropic.com/
+   - Paste your API key
+   - (Optional) Enter model: claude-3-5-sonnet-20241022
+   
+   Option C - Google Gemini (FREE TIER!):
+   - Select "Google Gemini"
+   - Get FREE API key from: https://aistudio.google.com/app/apikey
+   - Paste your API key
+   - (Optional) Enter model: gemini-1.5-flash-latest or gemini-1.5-pro-latest
+   
+   Option D - Custom API:
+   - Select "Custom API"
+   - Enter your API endpoint URL
+   - Enter your API key
+   - Enter model name if required
+
+3. (Optional) Add custom instructions:
+   Example: "Make the text more formal and professional"
+   Example: "Keep it casual and friendly"
+   
+4. Click "Save Settings"
+
+
+✨ STEP 4: USE THE EXTENSION
+-----------------------------
+1. Go to any webpage (Gmail, Confluence, LinkedIn, etc.)
+2. Select any text you want to improve
+3. Click the "✨ Polish Text" button that appears
+4. Wait for AI to generate suggestions
+5. Review the polished version
+6. Click "Replace" to update the text, or "Copy" to copy it
+
+
+📋 COMMON USE CASES
+-------------------
+✅ Writing emails in Gmail
+✅ Creating Confluence documentation
+✅ Composing LinkedIn posts
+✅ Drafting newsletters
+✅ Writing blog articles
+✅ Improving comments and replies
+
+
+🔑 API KEY INFORMATION
+-----------------------
+OpenAI Pricing:
+- gpt-4o-mini: ~$0.15 per 1M input tokens (very cheap!)
+- gpt-4o: ~$2.50 per 1M input tokens
+- More info: https://openai.com/api/pricing/
+
+Anthropic Pricing:
+- Claude models: Similar pricing structure
+- More info: https://www.anthropic.com/pricing
+
+Google Gemini Pricing:
+- gemini-1.5-flash: FREE tier! (15 requests/min)
+- gemini-1.5-pro: FREE tier! (2 requests/min)
+- Best for trying out the extension!
+- More info: https://ai.google.dev/pricing
+
+Your API keys are stored LOCALLY in Chrome's secure storage.
+No data is sent to third parties.
+
+
+🐛 TROUBLESHOOTING
+------------------
+Problem: Button doesn't appear when selecting text
+Solution: 
+- Refresh the page after installing
+- Make sure Developer mode is enabled
+- Check the extension is enabled in chrome://extensions/
+
+Problem: API Error messages
+Solution:
+- Verify your API key is correct
+- Check you have credits with your AI provider
+- Try a different model name
+
+Problem: Text won't replace
+Solution:
+- Some fields (passwords, etc.) cannot be modified
+- Use the "Copy" button instead
+- Manually paste the improved text
+
+
+📞 NEED HELP?
+-------------
+Check the README.md file for detailed documentation.
+
+
+🎉 YOU'RE ALL SET!
+------------------
+Start selecting text and improving your writing with AI!
