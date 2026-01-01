@@ -11,6 +11,29 @@
     <h1>⚙️ AI Text Polisher</h1>
     <p class="subtitle">Configure your AI provider</p>
 
+    <!-- Donate Section -->
+    <div class="donate-section">
+      <button id="donate-btn" class="donate-btn">
+        ☕ Support This Project
+      </button>
+      <div id="donate-options" class="donate-options" style="display: none;">
+        <div class="donate-option">
+          <h4>💳 UPI Payment (India)</h4>
+          <div class="qr-container">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=dey.purushottam@ybl&pn=Purushottam%20Dey&cu=INR" alt="UPI QR Code" class="qr-code">
+            <p class="upi-id">dey.purushottam@ybl</p>
+            <button class="copy-upi-btn" id="copy-upi">Copy UPI ID</button>
+          </div>
+        </div>
+        <div class="donate-option">
+          <h4>🌍 PayPal (International)</h4>
+          <a href="https://www.paypal.com/qrcodes/managed/f2901d40-420a-4db8-b3ac-2ca3e955297b?utm_source=consapp_onscreen" target="_blank" rel="noopener" class="paypal-btn">
+            Donate via PayPal
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="ai-provider">AI Provider</label>
       <select id="ai-provider">

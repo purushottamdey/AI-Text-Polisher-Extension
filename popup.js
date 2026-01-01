@@ -26,6 +26,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Donate button toggle
+document.getElementById('donate-btn').addEventListener('click', () => {
+  const donateOptions = document.getElementById('donate-options');
+  if (donateOptions.style.display === 'none') {
+    donateOptions.style.display = 'block';
+  } else {
+    donateOptions.style.display = 'none';
+  }
+});
+
+// Copy UPI ID functionality
+document.getElementById('copy-upi').addEventListener('click', async () => {
+  const upiId = 'dey.purushottam@ybl';
+  try {
+    await navigator.clipboard.writeText(upiId);
+    const btn = document.getElementById('copy-upi');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.background = '#27ae60';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '#667eea';
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy:', err);
+  }
+});
+
 // Toggle password visibility
 document.getElementById('toggle-key').addEventListener('click', () => {
   const apiKeyInput = document.getElementById('api-key');

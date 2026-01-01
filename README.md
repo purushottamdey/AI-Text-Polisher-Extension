@@ -230,6 +230,15 @@ Free to use and modify for personal and commercial projects.
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page or submit pull requests.
 
+## ☕ Support This Project
+
+If you find this extension helpful, consider supporting its development:
+
+- **UPI (India)**: `dey.purushottam@ybl`
+- **PayPal (International)**: [Donate via PayPal](https://www.paypal.com/qrcodes/managed/f2901d40-420a-4db8-b3ac-2ca3e955297b?utm_source=consapp_onscreen)
+
+You can also click the "Support This Project" button in the extension popup for quick access to donation options.
+
 ## 🙏 Acknowledgments
 
 - Built with modern Chrome Extension Manifest V3
